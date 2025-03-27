@@ -23,32 +23,19 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    createdBy: {        
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    updatedBy: {        
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     createdAt: {
         type: Date,
         default: Date.now
     },
     updatedAt: {
-        type: Date,
-        default: Date.now
-    }
-});
-
-const ContactSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    message: {
-        type: String,
-        required: true
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    createdAt: {
         type: Date,
         default: Date.now
     }
@@ -68,4 +55,3 @@ ProjectSchema.index({
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
-module.exports = mongoose.model('Contact', ContactSchema);
