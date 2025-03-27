@@ -31,7 +31,8 @@ exports.submitContactForm = async (req, res) => {
         // Create new contact message
         const newContact = new Contact({
             name,
-            message
+            message,
+            user: req.user._id // Associate with the logged-in user
         });
         
         // Save to MongoDB
