@@ -17,7 +17,8 @@ exports.getAllProjects = async (req, res) => {
         
         res.render('projects', { 
             title: 'Projects', 
-            projects: projects 
+            projects: projects,
+            user: req.user // Pass user details to template
         });
     } catch (err) {
         console.error(err);
@@ -47,7 +48,8 @@ exports.getProjectById = async (req, res) => {
         
         res.render('project-details', { 
             title: project.title, 
-            project: project 
+            project: project,
+            user: req.user // Pass user details to template
         });
     } catch (err) {
         console.error(err);
@@ -74,7 +76,8 @@ exports.showCreateProjectForm = (req, res) => {
             title: 'Add New Project',
             project: null,
             formAction: '/projects',
-            formMethod: 'POST'
+            formMethod: 'POST',
+            user: req.user // Pass user details to template
         });
     } catch (err) {
         console.error(err);
@@ -106,7 +109,8 @@ exports.createProject = async (req, res) => {
             summary,
             description,
             tech,
-            screenshot: `/uploads/${req.file.filename}`  // Store the path of the uploaded file
+            screenshot: `/uploads/${req.file.filename}`,  // Store the path of the uploaded file
+            createdBy: req.user._id // Track who created the project
         });
         
         // Save to MongoDB
@@ -119,6 +123,7 @@ exports.createProject = async (req, res) => {
             });
         }
         
+        req.flash('success_msg', 'Project added successfully');
         res.redirect(`/projects/${newProject._id}`);
     } catch (err) {
         console.error(err);
@@ -146,7 +151,8 @@ exports.showEditProjectForm = async (req, res) => {
             title: `Edit ${project.title}`,
             project,
             formAction: `/projects/${project._id}/update`,
-            formMethod: 'POST'
+            formMethod: 'POST',
+            user: req.user // Pass user details to template
         });
     } catch (err) {
         console.error(err);
@@ -190,7 +196,8 @@ exports.updateProject = async (req, res) => {
             summary,
             description,
             tech,
-            updatedAt: new Date()
+            updatedAt: new Date(),
+            updatedBy: req.user._id // Track who updated the project
         };
         
         // If a new file was uploaded, update the screenshot
@@ -220,6 +227,7 @@ exports.updateProject = async (req, res) => {
             });
         }
         
+        req.flash('success_msg', 'Project updated successfully');
         res.redirect(`/projects/${updatedProject._id}`);
     } catch (err) {
         console.error(err);
@@ -250,7 +258,8 @@ exports.showDeleteConfirmation = async (req, res) => {
         
         res.render('project-delete', { 
             title: `Delete ${project.title}`,
-            project
+            project,
+            user: req.user // Pass user details to template
         });
     } catch (err) {
         console.error(err);
@@ -297,6 +306,7 @@ exports.deleteProject = async (req, res) => {
             });
         }
         
+        req.flash('success_msg', 'Project deleted successfully');
         res.redirect('/projects');
     } catch (err) {
         console.error(err);
@@ -353,7 +363,8 @@ exports.searchProjects = async (req, res) => {
         res.render('projects', { 
             title: 'Search Results', 
             projects: projects,
-            searchTerm: query
+            searchTerm: query,
+            user: req.user // Pass user details to template
         });
     } catch (err) {
         console.error(err);

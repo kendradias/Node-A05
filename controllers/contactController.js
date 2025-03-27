@@ -8,7 +8,8 @@ const Contact = require('../src/models/contact');
 exports.getContactPage = (req, res) => {
     try {
         res.render('contact', { 
-            title: 'Contact Me' 
+            title: 'Contact Me',
+            user: req.user // pass user details to template
         });
     } catch (err) {
         console.error(err);
