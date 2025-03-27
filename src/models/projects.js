@@ -33,6 +33,27 @@ const ProjectSchema = new mongoose.Schema({
     }
 });
 
+const ContactSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    message: {
+        type: String,
+        required: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
 // Pre-save middleware to update the updatedAt field
 ProjectSchema.pre('findOneAndUpdate', function(next) {
     this.set({ updatedAt: new Date() });
@@ -47,3 +68,4 @@ ProjectSchema.index({
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
+module.exports = mongoose.model('Contact', ContactSchema);
