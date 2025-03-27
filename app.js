@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const session = require('express-session');
-const flash = require('c0nnect-flash');
+const flash = require('connect-flash');
 const passport = require('passport');
 
 // Load environment variables
@@ -31,7 +31,7 @@ app.use(express.static('public'));
 
 // Session Middleware
 app.use(session({
-    secret: preovess.env.SESSION_SECRET || 'secret',
+    secret: process.env.SESSION_SECRET || 'secret',
     resave: false,
     saveUninitiated: false,
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day - more than enough for now 
