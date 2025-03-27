@@ -24,6 +24,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Search Form -->
+                    <form action="/projects/search" method="GET" class="d-flex me-2">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Search projects..." aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button> 
+                    </form>
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="/">Home</a>
@@ -54,13 +61,6 @@
                             <% } %>
                         <% } %>
                     </ul>
-
-                    <!-- Search Form -->
-                    <form action="/projects/search" method="GET" class="d-flex me-2">
-                        <input class="form-control me-2" type="search" name="query" placeholder="Search projects..." aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
-                    </form>
-                    
                     <ul class="navbar-nav">
                         <% if(typeof user !== 'undefined' && user) { %>
                             <!-- User dropdown when logged in -->

@@ -586,5 +586,5 @@ height: 100% !important;
 
 /* Add more padding inside form cards */
 .auth-form .card-body, .contact-form .card-body {
-    padding: 2rem;
+    padding: 3rem;
 }
