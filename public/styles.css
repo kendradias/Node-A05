@@ -40,7 +40,7 @@ max-width: 1200px;
 margin: 2rem auto;
 padding: 0 1rem;
 flex: 1;
-margin-bottom: 4rem; /* Add space for footer */
+margin-bottom: 4rem;
 }
 
 footer {
@@ -164,10 +164,23 @@ box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 margin: 2rem 0;
 }
 
+.form-control {
+width: 100%;
+min-width: 400px; 
+}
+
+
 /* New styles for CRUD functionality */
 
 /* Card with shadow */
+
+.card-body {
+min-width: 400px; 
+padding: 3rem;
+}
+    
 .card {
+min-width: 550px;
 border: 1px solid #ddd;
 border-radius: 4px;
 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -188,10 +201,6 @@ color: white;
 .card-header.bg-danger {
 background-color: #dc3545;
 color: white;
-}
-
-.card-body {
-padding: 1.5rem;
 }
 
 .card-footer {

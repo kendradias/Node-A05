@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const bcrypt = require('bcryptjs');
 const Project = require('./src/models/projects');
+const User = require('./src/models/user');
 
 // Load environment variables
 dotenv.config();
@@ -26,16 +28,47 @@ const projectData = [
     }
 ];
 
+// Sample user data
+const userData = [
+    {
+        username: 'admin',
+        email: 'admin@example.com',
+        password: 'admin123',
+        role: 'admin'
+    },
+    {
+        username: 'user',
+        email: 'user@example.com',
+        password: 'user123',
+        role: 'user'
+    }
+];
+
 // Import data function
 const importData = async () => {
     try {
         // Clear existing data
         await Project.deleteMany();
+        await User.deleteMany();
         
-        // Insert new data
+        // Insert project data
         await Project.insertMany(projectData);
         
+        // Create users using User.create() 
+        const userPromises = userData.map(user => User.create(user));
+        await Promise.all(userPromises);
+        
         console.log('Data imported successfully!');
+        console.log('------------------------------');
+        console.log('Admin User:');
+        console.log(`Username: ${userData[0].username}`);
+        console.log(`Password: ${userData[0].password}`);
+        console.log('------------------------------');
+        console.log('Regular User:');
+        console.log(`Username: ${userData[1].username}`);
+        console.log(`Password: ${userData[1].password}`);
+        console.log('------------------------------');
+        
         process.exit(0);
     } catch (err) {
         console.error(`Error: ${err}`);
@@ -47,8 +80,9 @@ const importData = async () => {
 const destroyData = async () => {
     try {
         await Project.deleteMany();
+        await User.deleteMany();
         
-        console.log('Data destroyed successfully!');
+        console.log('All data destroyed successfully!');
         process.exit(0);
     } catch (err) {
         console.error(`Error: ${err}`);

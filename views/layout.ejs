@@ -47,18 +47,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/contact">Contact</a>
                             </li>
-                            
-                            <% if(user.role === 'admin') { %>
-                                <!-- Admin user - show admin links -->
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Admin
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                                        <li><a class="dropdown-item" href="/projects/create">Add Project</a></li>
-                                    </ul>
-                                </li>
-                            <% } %>
                         <% } %>
                     </ul>
                     <ul class="navbar-nav">
