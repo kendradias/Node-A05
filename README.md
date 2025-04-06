@@ -54,8 +54,9 @@ A Node.js-based portfolio application that showcases projects with full CRUD ope
      ```
    - Replace the MongoDB URI with the one provided below if needed
 
-4. **Seed the database (if you want to)**
+4. **Seed the database (includes some project seeds and an admin user/regular user)**
    npm run seed
+
 
 
 5. **Start the server**
